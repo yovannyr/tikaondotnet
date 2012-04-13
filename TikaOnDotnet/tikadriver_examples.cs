@@ -16,6 +16,18 @@ namespace TikaOnDotNet
 		}
 
 
+        [Test]
+        public void should_extract_from_chm()
+        {
+            var textExtractionResult = _cut.Extract("docs.chm");
+
+            textExtractionResult.Metadata["resourceName"].ShouldContain("docs.chm");
+
+            Console.WriteLine(textExtractionResult);
+
+            textExtractionResult.Text.Trim().ShouldNotBeEmpty();
+        }
+
 		[Test]
 		public void should_extract_contained_filenames_from_zips()
 		{
@@ -31,7 +43,8 @@ namespace TikaOnDotNet
 		{
 			var textExtractionResult = _cut.Extract("apache.jpg");
 
-			textExtractionResult.Text.ShouldBeEmpty();
+            //no text from images just metadata
+			textExtractionResult.Text.Trim().ShouldBeEmpty();
 
 			textExtractionResult.Metadata["Software"].ShouldContain("Paint.NET");
 
