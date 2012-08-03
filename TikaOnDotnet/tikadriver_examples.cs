@@ -31,11 +31,11 @@ namespace TikaOnDotNet
 		{
 			var textExtractionResult = _cut.Extract("apache.jpg");
 
-			textExtractionResult.Text.ShouldBeEmpty();
+			textExtractionResult.Text.Trim().ShouldBeEmpty();
 
 			textExtractionResult.Metadata["Software"].ShouldContain("Paint.NET");
 
-			Console.WriteLine(textExtractionResult);
+			//Console.WriteLine(textExtractionResult);
 		}
 
 		[Test]
